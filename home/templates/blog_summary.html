@@ -1,0 +1,27 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="fullrow">
+  {% for post in posts %}
+    <div class="feature-box medium">
+    {% with post=post.specific %}
+      {% with post_image=post.get_main_image %}
+        {% if post_image %}
+          <div>
+            {% image post_image fill-300x300 width="auto" height="auto" %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <div>
+        <div class="grace">
+          <p class="title">{{ post }}</p>
+          <br />
+          <p class="dim">{{ post.date|date:'d M Y' }}</p>
+        </div>
+        <p>{{ post.get_extract }}</p>
+        <br />
+        <a class="button" href="{{ post.url }}">{{ post }}</a>
+      </div>
+    </div>
+    {% endwith %}
+  {% endfor %}
+</div>

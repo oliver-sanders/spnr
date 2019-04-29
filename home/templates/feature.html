@@ -1,0 +1,19 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<div class="feature-box large">
+  <div>
+    {% image value.image max-500x500 height="auto" width="auto" %}
+  </div>
+  <div>
+    {% if value.title %}
+      <div class="grace">
+        <p class="title">{{ value.title }}</p>
+      </div>
+    {% endif %}
+    {{ value.text | richtext }}
+    {% if value.page %}
+      <a class="button feature" href="{{ value.page.url }}">{{ value.page }}</a>
+    {% endif %}
+  </div>
+</div>

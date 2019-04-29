@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+  <h1>{{ page.title }}</h1>
+
+  <div class="news-list">
+    {% for post in blogpages %}
+      {% with post=post.specific %}
+        <a href="{% pageurl post %}"><div class="item">
+          <div>
+            <h2>{{ post.title }}</h2>
+            <span class="date">{{ post.date }}</span>
+          </div>
+          {% with main_image=post.get_main_image %}
+            {% if main_image %}
+              {% image main_image fill-200x200 width=200 height=200 %}
+            {% endif %}
+          {% endwith %}
+        </div></a>
+      {% endwith %}
+    {% endfor %}
+  </div>
+
+  <div class="paginator">
+  {% for i in pages %}
+    {% if i == page_num %}
+      {{ i }}
+    {% else %}
+      <a href="{{ page.url }}?page={{ i }}">{{ i }}</a>
+    {% endif %}
+  {% endfor %}
+  </div>
+
+{% endblock %}

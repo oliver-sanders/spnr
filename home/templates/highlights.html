@@ -1,0 +1,15 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+<div class="fullrow">
+  {% for item in value.items %}
+    <div class="feature-box small">
+      <div>
+        {% image item.image fill-500x400 height="auto" width="auto" %}
+      </div>
+      <div>
+        <a class="button" href="{{ item.page.url }}">{{ item.page }}</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
