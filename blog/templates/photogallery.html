@@ -1,0 +1,16 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="photogallery">
+  <div class="row">
+    {% for column in page.gallery_chunks %}
+      <div class="column">
+      {% for item in column %}
+        <div class="item">
+          {% image item.image max-600x600 width="100%" height="auto" %}
+          {{ item.caption|richtext }}
+        </div>
+      {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

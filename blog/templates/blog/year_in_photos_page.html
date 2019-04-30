@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load date %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+
+  <h1>{{ page.title }}</h1>
+
+  {% if page.image %}
+    {% image page.image max-600x600 width="auto" height="auto" class="main-image" %}
+  {% endif %}
+
+  {{ page.body|richtext }}
+
+  {% include "photogallery.html" %}
+
+  {% include "section_break.html" %}
+
+  <h2>The Year In Photos</h2>
+
+  <div class="monthsel">
+    {% for year, months in page.get_grid.items %}
+      <div class="row">
+        <div class="heading">{{ year }}</div>
+          {% for month in months %}
+            {% if month %}
+              <a href="{{ month.url }}">
+            {% endif %}
+            <div>{{ forloop.counter | month_name }}</div></a>
+          {% endfor %}
+        </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

@@ -20,25 +20,31 @@ HTML_REGEX = re.compile(r'<[^>]+>')
 
 
 def get_extract(self, length=80):
-    body = HTML_REGEX.sub('', self.body)
-    for ind in range(min(len(body), length) - 1, 0, -1):
-        if body[ind] in [' ', '.', ',']:
-            break
-    return '%s ...' % body[:ind]
+    body = HTML_REGEX.sub('', self.body)  # crude strip HTML
+    if body:
+        for ind in range(min(len(body), length) - 1, 0, -1):
+            if body[ind] in [' ', '.', ',']:
+                break
+        return '%s ...' % body[:ind]
+    else:
+        return ''
 
 def get_main_image(self):
     image = None
-    if getattr(self, 'image'):
+    if hasattr(self, 'image'):
         image = self.image
-    elif getattr(self, 'gallery_images'):
+    elif hasattr(self, 'gallery_images'):
         gallery = self.gallery_images.first()
         if gallery:
             image = gallery.image
     return image
 
 def gallery_chunks(self, chunks=4):
-    imgs = self.gallery_images.all()
-    return [imgs[x::chunks] for x in range(chunks)]
+    ret = []
+    if getattr(self, 'gallery_images', None):
+        imgs = self.gallery_images.all()
+        ret = [imgs[x::chunks] for x in range(chunks)]
+    return ret
 
 
 class BlogIndexPage(Page):
@@ -96,10 +102,12 @@ class BlogPage(Page):
 
     get_main_image = get_main_image
 
-    galery_chunks = gallery_chunks
+    gallery_chunks = gallery_chunks
 
 
 class YearInPhotosPage(Page):
+
+    NAME = 'Year In Photos'
 
     date = models.DateField("Post date")
     body = RichTextField(blank=True)
@@ -108,7 +116,8 @@ class YearInPhotosPage(Page):
         index.SearchField('body'),
     ]
 
-    content_panels = Page.content_panels + [
+    content_panels = [
+        # dont append to parent's content panels to remote the title field
         FieldPanel('date'),
         FieldPanel('body', classname="full"),
         InlinePanel('gallery_images', label="Photo Gallery"),
@@ -118,24 +127,43 @@ class YearInPhotosPage(Page):
 
     get_main_image = get_main_image
 
-    galery_chunks = gallery_chunks
+    gallery_chunks = gallery_chunks
+
+    def __init__(self, *args, **kwargs):
+        Page.__init__(self, *args, **kwargs)
+        if not self.title:
+            self.set_title()
 
     def get_grid(self):
+        """Return year in photos year-month grid."""
         grid = {}
         pages = self.get_parent().get_children().type(YearInPhotosPage).live()
         for page in pages:
-            blogpage = page.blogpage
+            blogpage = page.yearinphotospage
             year, month = blogpage.date.year, blogpage.date.month
             grid.setdefault(year, [None] * 12)
             grid[year][month - 1] = page
         return grid
 
+    def set_title(self):
+        name = self.NAME
+        if self.date:
+            name += ' %s %s' % (
+                calendar.month_name[self.date.month], self.date.year)
+        self.title = name
+
     def save(self, *args, **kwargs):
-        self.title = '%s %s' % (
-            calendar.month_name[self.date.month],
-            self.date.year
-        )
+        """Derive the page title from the date.
+
+        Note the slug is derived also but this is done live using JS, see
+        wagtail_hooks.py
+        """
+        self.set_title()
         Page.save(self, *args, **kwargs)
+
+    #def serve_preview(self, *args, **kwargs):
+    #    self.set_title()
+    #    return Page.serve_preview(self, *args, **kwargs)
 
 
 class BlogPageGalleryImage(Orderable):
