@@ -6,7 +6,10 @@
       <div class="column">
       {% for item in column %}
         <div class="item">
-          {% image item.image max-600x600 width="100%" height="auto" %}
+          {% image item.image max-2048x2048 as full %}
+          <a href="{{full.url}}">
+            {% image item.image max-600x600 width="100%" height="auto" %}
+          </a>
           {{ item.caption|richtext }}
         </div>
       {% endfor %}
