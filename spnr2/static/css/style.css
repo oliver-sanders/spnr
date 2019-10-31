@@ -1,0 +1,356 @@
+body {
+    margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* screen size */
+
+@media (min-width:0px) {
+    .container .section .top .left { width: 100%; }
+    .container .section .top .right { width: 0%; }
+    .container {font-size: 35px;}
+}
+
+@media (min-width:1000px) {
+    .container .section .top .left { width: 80%; }
+    .container .section .top .right { width: 20%; }
+    .container {font-size: 30px;}
+}
+
+@media (min-width:1250px) {
+    .container .section .top .left { width: 70%; }
+    .container .section .top .right { width: 30%; }
+    .container {font-size: 30px;}
+}
+
+@media (min-width:1500px) {
+    .container .section .top .left { width: 40%; }
+    .container .section .top .right { width: 60%; }
+    .container {font-size: 30px;}
+}
+
+
+/* fonts */
+
+body{
+    font-family: lato;
+    font-weight: 200;
+}
+
+.section .button {
+    text-decoration: none;
+    font-size: 1em;
+}
+
+h1 {}
+h2 {
+    font-weight: 150;
+    font-size: 2em;
+}
+
+.dim {
+    opacity: 0.8
+}
+
+
+/* structure */
+
+.container {
+}
+
+.container .section .top {
+    display: flex;
+}
+
+.container .section .top .left img {
+    width: 100%;
+    height: 100%;
+}
+
+.container .section .top .left {
+}
+
+.container .section .top .right {
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+}
+
+.container .section .bottom {
+    width: 100%;
+    padding: 0 1em 0 1em;
+    min-height: 20em;
+    display: inline-block;
+    background-size: cover;
+}
+
+
+/* img-boxes */
+
+
+.feature-box {
+    margin: 1em;
+}
+
+.feature-box.small {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.feature-box.small img {
+    width: 8em;
+    margin: 0 0.3em 0 0.3em;
+}
+
+.feature-box.medium {
+    display: flex;
+    margin: 1em;
+    font-size: 0.7em;
+}
+
+.feature-box.medium img {
+    width: 8em;
+    margin: 0 1em 0 0;
+}
+
+@media (min-width: 0px) {.feature-box.medium{width: 100%;}}
+@media (min-width: 1000px) {.feature-box.medium{width: 45%;}}
+@media (min-width: 1200px) {.feature-box.medium{width: 25em;}}
+
+.feature-box.large {
+    max-width: 30em;
+    margin: 1em auto 1em auto;
+}
+
+@media (min-width:0px) {
+    .feature-box.large {
+        width: calc(100% - 4em);
+        display: block;
+        text-align: center;
+    }
+    .feature-box.large img {
+        width: 100%;
+        margin: 1em 0 1em 0;
+    }
+}
+
+@media (min-width:800px) {
+    .feature-box.large {
+        width: 30em;
+        max-width: 100%;
+        display: flex;
+        text-align: left;
+    }
+    .feature-box.large img {
+        width: 10em;
+        margin: 0 1em 0.3em 1em;
+    }
+}
+
+.feature-box p {
+    display: inline;
+}
+
+.feature-box p.title {
+    font-size: 1.1em;
+    font-weight: 400;
+}
+
+.feature-box .grace {
+    margin: 0 0 0.5em 0;
+}
+
+.fullrow {
+    margin: 0 auto 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 0px) {.row.collapse {display: block;}}
+@media (min-width: 800px) {.row.collapse {display: flex;}}
+
+
+/* components */
+
+.button {
+    text-align: center;
+    display: inline-block;
+    margin: 0.5em 0em 0.5em 0em;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    border: none;
+    border-radius: 1em;
+}
+
+.button.feature {
+    font-weight: 400;
+}
+
+
+/* tablaus: dynamic component */
+
+/*
+
+ This works great but sadly only in webkit only at the moment :(
+ For the meantime we will have to hardcode this in the template!
+ See the horrible javascript hack in the base template.
+
+.container .section:nth-child(1) .top .left img {
+    content: url("../svg/blue-top-left.svg");}
+.container .section:nth-child(2) .top .left img {
+    content: url("../svg/green-top-left.svg");}
+.container .section:nth-child(3) .top .left img {
+    content: url("../svg/yellow-top-left.svg");}
+.container .section:nth-child(4) .top .left img {
+    content: url("../svg/brown-top-left.svg");}
+*/
+
+.container .section:nth-child(1) .top .right {
+    background-image: url("../svg/blue-top-right.svg");}
+.container .section:nth-child(2) .top .right {
+    background-image: url("../svg/green-top-right.svg");}
+.container .section:nth-child(3) .top .right {
+    background-image: url("../svg/yellow-top-right.svg");}
+.container .section:nth-child(4) .top .right {
+    background-image: url("../svg/brown-top-right.svg");}
+
+.container .section:nth-child(1) .bottom  {
+    background-image: url("../svg/blue-bottom.svg");}
+.container .section:nth-child(2) .bottom {
+    background-image: url("../svg/green-bottom.svg");}
+.container .section:nth-child(3) .bottom {
+    background-image: url("../svg/yellow-bottom.svg");}
+.container .section:nth-child(4) .bottom {
+    background-image: url("../svg/brown-bottom.svg");}
+
+.container .section:nth-child(1) {color: rgb(54, 77, 124);}
+.container .section:nth-child(2) {color: rgb(35, 79, 70);}
+.container .section:nth-child(3) {color: rgb(113, 111, 49);}
+.container .section:nth-child(4) {color: rgb(113, 84, 42);}
+
+.section:nth-child(1) .button {
+    color: rgb(54, 77, 124);
+    background-color: rgb(169, 188, 218);
+}
+
+.section:nth-child(2) .button {
+    color: rgb(25, 68, 60);
+    background-color: rgb(169, 218, 209);
+}
+
+.section:nth-child(3) .button {
+    color: rgb(91, 90, 18);
+    background-color: rgb(214, 214, 134);
+}
+
+.section:nth-child(4) .button {
+    color: rgb(250, 240, 210);
+    background-color: rgb(192, 159, 112);
+}
+
+
+/* photogallery */
+
+.photogallery .row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create two equal columns that sits next to each other */
+.photogallery .column {
+    padding: 0 4px;
+}
+
+.photogallery .item {
+    margin-top: 8px;
+    vertical-align: middle;
+}
+
+.photogallery .item .rich-text {
+    padding: 0 0.2em 0 0.2em;
+    text-align: center;
+    font-size: 0.8em;
+    word-wrap: break-word;
+}
+
+@media (min-width: 0px) {.photogallery .column {flex: 100%;}}
+@media (min-width: 800px) {.photogallery .column {flex: 50%;}}
+@media (min-width: 1200px) {.photogallery .column {flex: 25%;}}
+
+
+/* month selector */
+.monthsel {
+    display: grid;
+}
+.monthsel .row div {
+    float: left;
+    padding: 0.2em;
+    margin: 0.05em;
+}
+
+.monthsel .row div.heading {
+    font-weight: 400;
+}
+
+.section:nth-child(1) .monthsel .row a div {
+    background-color: rgb(54, 77, 124);
+    color: rgb(169, 188, 218);
+}
+
+.section:nth-child(2) .monthsel .row a div {
+    background-color: rgb(25, 68, 60);
+    color: rgb(169, 218, 209);
+}
+
+.section:nth-child(3) .monthsel .row a div {
+    background-color: rgb(91, 90, 18);
+    color: rgb(214, 214, 134);
+}
+
+.section:nth-child(4) .monthsel .row a div {
+    background-color: rgb(250, 240, 210);
+    color: rgb(192, 159, 112);
+}
+/* paginator */
+
+.paginator a {
+    text-decoration: none;
+}
+
+.paginator:before {
+    content: 'Page';
+}
+
+img.main-image {
+    float:right;
+    padding: 0 1em 1em 1em;
+    max-width: 15em;
+}
+
+.news-list {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.news-list .item {
+    display: flex;
+    margin: 1em;
+}
+
+.news-list .item div {
+    width: 10em;
+}
+
+.news-list .item h2 {
+    font-size: 1em;
+}
+
+.news-list .item span.date {
+    font-size: 0.8em;
+}
+
+.news-list .item img {
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="150" height="60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <linearGradient id="linearGradient945" x1="47.5" x2="47.5" y1="1.05e3" y2="990" gradientTransform="matrix(1.5 0 0 1 .963 -988)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#dad9a8" stop-opacity="0" offset="0"/>
+   <stop stop-color="#ebe8b0" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <path d="m150 0h-150v60l150-0.563c-0.224-0.01 0-56.3 0-59.4z" fill="url(#linearGradient945)" fill-rule="evenodd"/>
+</svg>
